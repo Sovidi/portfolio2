@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 var cors= require('cors')
 var bodyParser = require('body-parser')
+require('dotenv').config();
 
 app.use(express.static(`dist`));
 
@@ -11,7 +12,7 @@ app.use(bodyParser.json());
 
 const dbConnect = async (str) => {
     const { MongoClient } = require('mongodb');
-    const client = await MongoClient.connect('mongodb+srv://lim132445:zCnCDyeTGM7toUhV@sovidi.v53i9gi.mongodb.net/?retryWrites=true&w=majority');
+    const client = await MongoClient.connect(process.env.HOST, { useNewUrlParser: true, useUnifiedTopology: true });
     const db = client.db("portfolio")
     const collection = db.collection(str)
     console.log(collection)
