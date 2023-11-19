@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 const dbConnect = async (str) => {
     const { MongoClient } = require('mongodb');
-    const client = await MongoClient.connect(process.env.S_HOST);
+    const client = await MongoClient.connect("mongodb+srv://lim132445:zCnCDyeTGM7toUhV@sovidi.v53i9gi.mongodb.net/?retryWrites=true&w=majority");
     const db = client.db("portfolio")
     const collection = db.collection(str)
     console.log(collection)
