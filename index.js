@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 const dbConnect = async (str) => {
     const { MongoClient } = require('mongodb');
-    const client = await MongoClient.connect(process.env.HOST, { useNewUrlParser: true, useUnifiedTopology: true });
+    const client = await MongoClient.connect(process.env.S_HOST, { useNewUrlParser: true, useUnifiedTopology: true });
     const db = client.db("portfolio")
     const collection = db.collection(str)
     console.log(collection)
