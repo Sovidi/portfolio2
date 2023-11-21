@@ -23,7 +23,7 @@ app.get('/api', async function (req, res) {
     const collection = await dbConnect("comment"); 
     let data = await collection.find().toArray();
 
-    res.send(data)
+    res.send(data);
 })
 
 app.post(`/api/insert`, async function(req, res) {
@@ -31,16 +31,16 @@ app.post(`/api/insert`, async function(req, res) {
     await collection.insertOne(req.body);
     // const dataGet = await collection.find().toArray();
 
-    res.send("글쓰여짐")
+    res.send("글쓰여짐");
 })
 
 app.put(`/api/put`, async function(req, res) {
     const collection = await dbConnect("comment");
-    const qData = req.body; 
+    const qData = req.body;
     await collection.updateOne({name: qData.name, email: qData.email}, {$set:{text: qData.text}});
     // const dataGet = await collection.find().toArray();
 
-    res.send("글수정됨")
+    res.send("글수정됨");
 })
 
 
