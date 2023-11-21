@@ -43,6 +43,13 @@ app.put(`/api/put`, async function(req, res) {
     res.send("글수정됨");
 })
 
+app.delete(`/api/delete`, async function(req, res) {
+    const collection = await dbConnect("comment");
+    await collection.deleteMany({name:"헣허헣"});
+
+    res.send("지워짐")
+})
+
 
 
 app.listen(3050)
