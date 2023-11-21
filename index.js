@@ -29,10 +29,20 @@ app.get('/api', async function (req, res) {
 app.post(`/api/insert`, async function(req, res) {
     const collection = await dbConnect("comment"); 
     await collection.insertOne(req.body);
-    const dataGet = await collection.find().toArray();
+    // const dataGet = await collection.find().toArray();
 
-    res.send(dataGet)
+    res.send("글쓰여짐")
 })
+
+app.put(`/api/put`, async function(req, res) {
+    const collection = await dbConnect("comment");
+    const qData = req.body; 
+    await collection.updateOne({name: qData.name, email: qData.email}, {$set:{text: qData.text}});
+    // const dataGet = await collection.find().toArray();
+
+    res.send("글수정됨")
+})
+
 
 
 app.listen(3050)
