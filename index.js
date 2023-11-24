@@ -12,10 +12,10 @@ app.use(bodyParser.json());
 
 const dbConnect = async (str) => {
     const { MongoClient } = require('mongodb');
-    const client = await MongoClient.connect(process.env.S_HOST, { useNewUrlParser: true, useUnifiedTopology: true });
+    const client = await MongoClient.connect(process.env.S_HOST);
     const db = client.db("portfolio")
     const collection = db.collection(str)
-    console.log(collection)
+    // console.log(collection)
     return collection
 }
 
@@ -36,7 +36,7 @@ app.post(`/api/insert`, async function(req, res) {
 
 app.put(`/api/put`, async function(req, res) {
     const collection = await dbConnect("comment");
-    const qData = req.body;
+    const qData = await req.body;
     await collection.updateOne({name: qData.name, email: qData.email}, {$set:{text: qData.text}});
     // const dataGet = await collection.find().toArray();
 
@@ -45,9 +45,10 @@ app.put(`/api/put`, async function(req, res) {
 
 app.delete(`/api/delete`, async function(req, res) {
     const collection = await dbConnect("comment");
-    await collection.deleteMany({name:"헣허헣"});
+    const qData = req.query;
+    await collection.deleteOne({name: qData.name, email: qData.email});
 
-    res.send("지워짐")
+    res.send("지워짐");
 })
 
 
