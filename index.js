@@ -20,13 +20,13 @@ const dbConnect = async (str) => {
     return {client, collection};
 };
 
-// app.get('/api', async function (req, res) {
-//     const {client, collection} = await dbConnect("comment"); 
-//     let data = await collection.find().toArray();
+app.get('/api', async function (req, res) {
+    const {client, collection} = await dbConnect("comment"); 
+    let data = await collection.find().toArray();
 
-//     await client.close();
-//     res.send(data);
-// })
+    await client.close();
+    res.send(data);
+})
 
 app.post(`/api/insert`, async function(req, res) {
     const {client, collection} = await dbConnect("comment"); 
